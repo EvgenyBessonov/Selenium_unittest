@@ -1,14 +1,14 @@
-import locators as lc
 import time
 import unittest
 import random
-
+import locators as lc
 import page as pg
 from selenium import webdriver
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
+
 def delay():
     time.sleep(random.randint(1, 5))
 
@@ -28,7 +28,6 @@ class SubscriptionBox(unittest.TestCase):
         # Scroll down to the element
         ActionChains(driver).move_to_element(
             driver.find_element(lc.sw)).perform()
-        delay()
         driver.save_screenshot('./Screenshots/image1.jpg')
         image = driver.find_element(lc.im_asf)
         if image.is_displayed():
@@ -36,7 +35,24 @@ class SubscriptionBox(unittest.TestCase):
         else:
             print("Image is not present")
 
+    def test_TC_003(self):
+        driver = self.driver
+        driver.get(pg.sb_url)
+        driver.find_element(lc.im_asf).click()
+        delay()
+        driver.save_screenshot('./Screenshots/image2.jpg')
 
+    def test_TC_004(self):
+        driver = self.driver
+        driver.get(pg.sb_url)
+        driver.find_element(lc.im_asf).click()
+        driver.find_element(By.XPATH, "//button[@aria-label='Zoom in/out']").click()
+        driver.find_element(By.XPATH, "//button[@aria-label='Zoom in/out']").click()
+        driver.find_element(By.XPATH, "//button[@aria-label='Toggle fullscreen']").click()
+        driver.find_element(By.XPATH, "//button[@aria-label='Toggle fullscreen']").click()
+        driver.find_element(By.XPATH, "//button[@aria-label='Close (Esc)']").click()
+        delay()
+        driver.save_screenshot('./Screenshots/image3.jpg')
 
     def tearDown(self):
         self.driver.quit()
