@@ -1,8 +1,5 @@
 sb_url = 'https://customseafoods.com/product/alaska-seafood-subscription-box/' #Subscription box page url
 
-
-
-
 # from selenium import webdriver
 #
 # class BasePage(object):

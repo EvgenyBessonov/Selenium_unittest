@@ -1,9 +1,7 @@
 import time
 import unittest
 import random
-
 from selenium.webdriver.remote.webelement import WebElement
-
 import locators as lc
 import page as pg
 from selenium import webdriver
@@ -33,7 +31,7 @@ class SubscriptionBox(unittest.TestCase):
             driver.find_element(By.XPATH, "//span[@class='sku_wrapper']")).perform()
         driver.save_screenshot('./Screenshots/image1.jpg')
         image = driver.find_element(By.XPATH, "//img[@title='Alaska Seafood Group']")
-        assert "Alaska Seafood Group" in image.title
+        assert image.is_displayed()
         if image.is_displayed():
             print("Image is present")
         else:
@@ -42,14 +40,14 @@ class SubscriptionBox(unittest.TestCase):
     def test_TC_003(self):
         driver = self.driver
         driver.get(pg.sb_url)
-        driver.find_element(lc.im_asf).click()
+        driver.find_element(By.XPATH, "//img[@title='Alaska Seafood Group']").click()
         delay()
         driver.save_screenshot('./Screenshots/image2.jpg')
 
     def test_TC_004(self):
         driver = self.driver
         driver.get(pg.sb_url)
-        driver.find_element(lc.im_asf).click()
+        driver.find_element(By.XPATH, "//img[@title='Alaska Seafood Group']").click()
         driver.find_element(By.XPATH, "//button[@aria-label='Zoom in/out']").click()
         driver.find_element(By.XPATH, "//button[@aria-label='Zoom in/out']").click()
         driver.find_element(By.XPATH, "//button[@aria-label='Toggle fullscreen']").click()
