@@ -1,6 +1,9 @@
 import time
 import unittest
 import random
+
+from selenium.webdriver.remote.webelement import WebElement
+
 import locators as lc
 import page as pg
 from selenium import webdriver
@@ -27,9 +30,10 @@ class SubscriptionBox(unittest.TestCase):
         driver.get(pg.sb_url)
         # Scroll down to the element
         ActionChains(driver).move_to_element(
-            driver.find_element(lc.sw)).perform()
+            driver.find_element(By.XPATH, "//span[@class='sku_wrapper']")).perform()
         driver.save_screenshot('./Screenshots/image1.jpg')
-        image = driver.find_element(lc.im_asf)
+        image = driver.find_element(By.XPATH, "//img[@title='Alaska Seafood Group']")
+        assert "Alaska Seafood Group" in image.title
         if image.is_displayed():
             print("Image is present")
         else:
